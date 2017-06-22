@@ -19,27 +19,78 @@ dir()
 source("filename.R")
 ```
 
-- Read File
+- Read CSV File
 
 ```r
-data = read.csv("filename.csv")
+dataFrame = read.csv("filename.csv")
+```
+
+- Save CSV File
+
+```r
+write.csv(dataFrame, "filename.csv")
 ```
 
 # Show Variable
+
 ```r
 ls()
 ```
 
+# Remove Variable
 
-# Split data by category
+```r
+rm(dataFrame)
+```
 
-by month
+
+### DataFrame
+
+- Data Info
+
+```r
+summary(dataFrame)
+str(dataFrame)
+```
+
+
+- filter data.frame by subset
+
+```r
+data_region_factor_is_Europe = subset(dataFrame, Region == "Europe")
+outliner = subset(dataFrame, income > 1000 & population < 5000)
+```
+
+
+- split by month
+
 ```r
 s <- split(airquality, airquality$Month)
 ```
 
+- summary data
 
-# Get data from matrix
+```r
+mean(dataFrame$population)
+sd(dataFrame$income)
+summary(dataFrame$score)
+```
+
+- attribution
+
+```r
+which.min(dataFrame$population)
+which.max(dataFrame$income)
+```
+
+
+- plot
+
+```r
+plot(DataFrame$population, dataFrame$income)
+```
+
+# Matrix
 
 get first two row
 ```
