@@ -31,17 +31,21 @@ dataFrame = read.csv("filename.csv")
 write.csv(dataFrame, "filename.csv")
 ```
 
-# Show Variable
+- Show Variable
 
 ```r
 ls()
 ```
 
-# Remove Variable
+- Remove Variable
 
 ```r
 rm(dataFrame)
 ```
+
+
+# Script
+
 
 
 ### DataFrame
@@ -52,7 +56,6 @@ rm(dataFrame)
 summary(dataFrame)
 str(dataFrame)
 ```
-
 
 - filter data.frame by subset
 
@@ -73,6 +76,7 @@ s <- split(airquality, airquality$Month)
 ```r
 mean(dataFrame$population)
 sd(dataFrame$income)
+sd(dataFrame$income, na.rm=TRUE)
 summary(dataFrame$score)
 ```
 
@@ -82,6 +86,12 @@ summary(dataFrame$score)
 which.min(dataFrame$population)
 which.max(dataFrame$income)
 dataFrame$Country[163]
+```
+
+- search name
+
+```r
+match("CAVIAR", USDA$Description)
 ```
 
 # Visualization
@@ -116,7 +126,6 @@ tapply(DataFrame$income, DataFrame$Region, mean)
 // before process data remove na at first
 tapply(DataFrame$income, DataFrame$Region, min, na.rm=TRUE)
 ```
-
 
 # Matrix
 
