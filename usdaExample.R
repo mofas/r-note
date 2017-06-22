@@ -19,3 +19,6 @@ USDA$HighCarbohydrate = as.numeric(USDA$Carbohydrate > mean(USDA$Carbohydrate, n
 
 
 table(USDA$HighSodium, USDA$HighFat)
+
+tapply(USDA$Iron, USDA$HighProtein, mean, na.rm=TRUE)
+tapply(USDA$VitaminC, USDA$HighCarbohydrate, summary, na.rm=TRUE)
