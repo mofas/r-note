@@ -81,14 +81,42 @@ summary(dataFrame$score)
 ```r
 which.min(dataFrame$population)
 which.max(dataFrame$income)
+dataFrame$Country[163]
 ```
 
+# Visualization
 
 - plot
 
 ```r
 plot(DataFrame$population, dataFrame$income)
 ```
+
+- hist
+
+```r
+hist(DataFrame$population)
+```
+
+- boxplot
+
+```r
+boxplot(DataFrame$population ~ DataFrame$income)
+boxplot(DataFrame$population ~ DataFrame$income, xlab="x label", ylab="y label", main="title")
+```
+
+- table
+
+```r
+table(DataFrame$Region)
+
+// the average income group by region
+tapply(DataFrame$income, DataFrame$Region, mean)
+
+// before process data remove na at first
+tapply(DataFrame$income, DataFrame$Region, min, na.rm=TRUE)
+```
+
 
 # Matrix
 
