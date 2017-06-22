@@ -1,5 +1,5 @@
 
-### Dir & File
+# Dir & File
 
 - Get current dictory
 
@@ -25,13 +25,13 @@ source("filename.R")
 data = read.csv("filename.csv")
 ```
 
-### Show Variable
+# Show Variable
 ```r
 ls()
 ```
 
 
-### Split data by category
+# Split data by category
 
 by month
 ```r
@@ -39,7 +39,7 @@ s <- split(airquality, airquality$Month)
 ```
 
 
-### Get data from matrix
+# Get data from matrix
 
 get first two row
 ```
@@ -52,14 +52,14 @@ dim(data[!complete.cases(data[,1]),])
 ```
 
 
-### Filter
+# Filter
 
 filter by col value
 ```r
 vir <- iris[iris$Species == "virginica",]
 ```
 
-### Seq & Rep
+# Seq & Rep
 
 
 ```r
@@ -70,7 +70,7 @@ rep(c(0,1,2), each=10) // 0 0 0 0 0 0 ... 1 1 ....  2 2 ....
 ```
 
 
-### NA
+# NA
 
 
 - op
@@ -93,12 +93,13 @@ x[!is.na(x) & x > 0]
 ```
 
 
-### Factor
+# Factor
 
 factor is enum type
 
 
-### Matrix
+
+# Matrix
 
 - Create
 
@@ -156,7 +157,7 @@ x <- matrix(1:4, nrow = 2, ncol = 2)
 dimnames(x) <- list(c("a","b"), c("c","d"))
 ```
 
-### Data frame
+# Data frame
 
 - create data frame
 
@@ -167,7 +168,7 @@ x <- data.frame(foo = 1:4, bar = c(T,T,F,F))
 
 
 
-### Process Data
+# Process Data
 
 ```r
 x <- c(1,2,3,4,5)
@@ -193,7 +194,7 @@ x[["bar"]]
 
 
 
-### Save and load data
+# Save and load data
 
 ```r
 dput & dget
@@ -203,7 +204,7 @@ new.y <- dget("y.R")
 ```
 
 
-### Function
+# Function
 
 - create function
 
