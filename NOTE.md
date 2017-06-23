@@ -41,6 +41,10 @@ ls()
 
 ```r
 rm(dataFrame)
+# clear all variable
+rm(list=ls())
+# clearn all variable except function
+rm(list = setdiff(ls(), lsf.str()))
 ```
 
 
