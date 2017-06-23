@@ -66,8 +66,13 @@ abline(v=as.Date(c("1997-11-01")), lwd=2)
 
 
 # 4.1
+mean(IBM$StockPrice)
 tapply(IBM$StockPrice, months(IBM$Date), mean)
 
+# 4.2
+tapply(GE$StockPrice, months(GE$Date), mean)
+
+# 4.3
 
 
 
