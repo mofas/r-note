@@ -68,6 +68,8 @@ sort(table(CPS$Country))
 table(CPS$MetroArea == "New York-Northern New Jersey-Long Island, NY-NJ-PA", CPS$Country != "United States")
 
 # 4.4
-sort(tapply(CPS$Country == "India", CPS$MetroArea, mean, na.rm=TRUE))
+sort(tapply(CPS$Country == "India", CPS$MetroArea, sum, na.rm=TRUE))
+sort(tapply(CPS$Country == "Brazil", CPS$MetroArea, sum, na.rm=TRUE))
+sort(tapply(CPS$Country == "Somalia", CPS$MetroArea, sum, na.rm=TRUE))
 
 
