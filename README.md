@@ -4,17 +4,16 @@ This document record some common used R script for data analysis.
 
 # Table of Content
 
-- [Dir & File](#dir-&-file)
+- [Dir & File](#dir--file)
 - [DataFrame](#dataframe)
 - [Visualization](#visualization)
 - [Matrix](#matrix)
 - [Filter](#filter)
-- [Seq & Rep](#seq-&-rep)
+- [Seq & Rep](#seq--rep)
 - [NA](#na)
 - [Factor](#factor)
-- [Matrix](#matrix)
+- [Matrix](#matrix-1)
 - [Linear Regression](#linear-regression)
-- [Process Data](#process-data)
 - [Save and load data](#save-and-load-data)
 - [Function](#function)
 
@@ -154,25 +153,6 @@ tapply(DataFrame$income, DataFrame$Region, mean)
 tapply(DataFrame$income, DataFrame$Region, min, na.rm=TRUE)
 ```
 
-# Matrix
-
-get first two row
-```
-data[0:2,]
-```
-
-get num of first col is NA
-```r
-dim(data[!complete.cases(data[,1]),])
-```
-
-
-# Filter
-
-filter by col value
-```r
-vir <- iris[iris$Species == "virginica",]
-```
 
 # Seq & Rep
 
@@ -232,6 +212,28 @@ x <- (1:6, nrow = 2, ncol = 3)
 
 ```r
 dim(x)
+```
+
+-  Get Data
+
+get first two row
+
+```
+data[0:2,]
+```
+
+get num of first col is NA
+
+```r
+dim(data[!complete.cases(data[,1]),])
+```
+
+- Filter
+
+filter by col value
+
+```r
+vir = iris[iris$Species == "virginica"]
 ```
 
 
@@ -300,32 +302,6 @@ sumamry(model)
 ```r
 SSE = sum(model$residuals^2)
 ```
-
-
-# Process Data
-
-```r
-x <- c(1,2,3,4,5)
-x[1]
-x[1:4]
-x[ x > 3]
-
-x <- matrix(1:6, 2, 3)
-x[1,2]
-x[2,1]
-x[1,]
-x[,2]
-```
-
-- get data
-
-```r
-x <- list(foo = 1:4, bar = 0.6)
-x$bar
-x["bar"]
-x[["bar"]]
-```
-
 
 
 # Save and load data
