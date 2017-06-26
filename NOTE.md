@@ -189,6 +189,12 @@ sum(is.na(x))
 x[!is.na(x) & x > 0]
 ```
 
+- filter NA in dataframe
+
+```r
+pisaTrain = na.omit(pisaTrain)
+```
+
 
 # Factor
 
