@@ -1,5 +1,26 @@
 
-# Dir & File
+This document record some common used R script for data analysis.
+
+
+# Table of Content
+
+- [Dir & File](#dir-&-file)
+- [DataFrame](#dataframe)
+- [Visualization](#visualization)
+- [Matrix](#matrix)
+- [Filter](#filter)
+- [Seq & Rep](#seq-&-rep)
+- [NA](#na)
+- [Factor](#factor)
+- [Matrix](#matrix)
+- [Linear Regression](#linear-regression)
+- [Process Data](#process-data)
+- [Save and load data](#save-and-load-data)
+- [Function](#function)
+
+
+
+## Dir & File
 
 - Get current dictory
 
@@ -46,9 +67,6 @@ rm(list=ls())
 # clearn all variable except function
 rm(list = setdiff(ls(), lsf.str()))
 ```
-
-
-# Script
 
 
 
@@ -328,4 +346,29 @@ new.y <- dget("y.R")
 x <- function(<agruments>) {
 }
 search()
+```
+
+
+# Linear Regression
+
+```r
+trainData = read.csv("trainData.csv")
+testData = read.csv("testData.csv")
+
+# build model which automatically mapp to all other column
+model1 = lm(y ~., data=trainData)
+# explicitly indicate which column will be used as independent data.
+model2 = lm(y ~ x1 + x2 + x3, data=trainData)
+
+# SSE & RMSE of train data
+SSE = sum(model1$residuals^2)
+RMSE = sqrt(SSE/nrow(trainData))
+
+# make prediction
+predTest1 = predict(model1, newdata=testData)
+predTest2 = predict(model2, newdata=testData)
+
+# SSE & RMSE of test data
+SSE = sum((testData$y - predTest1)^2)
+RMSE = sqrt(SSE/nrow(testData))
 ```
