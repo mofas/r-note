@@ -52,7 +52,7 @@ rm(list = setdiff(ls(), lsf.str()))
 
 
 
-### DataFrame
+# DataFrame
 
 - Data Info
 
@@ -68,6 +68,11 @@ data_region_factor_is_Europe = subset(dataFrame, Region == "Europe")
 outliner = subset(dataFrame, income > 1000 & population < 5000)
 ```
 
+- create data frame
+
+```r
+x <- data.frame(foo = 1:4, bar = c(T,T,F,F))
+```
 
 - split by month
 
@@ -249,15 +254,28 @@ x <- matrix(1:4, nrow = 2, ncol = 2)
 dimnames(x) <- list(c("a","b"), c("c","d"))
 ```
 
-# Data frame
 
-- create data frame
+
+# Linear Regression
+
+
+- create model
 
 ```r
-x <- data.frame(foo = 1:4, bar = c(T,T,F,F))
+model = lm(Label ~ InputA + InputB, data=dataFrame)
 ```
 
+- get model coefficient
 
+```r
+sumamry(model)
+```
+
+- get model SSE
+
+```r
+SSE = sum(model$residuals^2)
+```
 
 
 # Process Data
