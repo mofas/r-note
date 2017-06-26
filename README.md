@@ -12,11 +12,10 @@ This document record some common used R script for data analysis.
 - [Seq & Rep](#seq--rep)
 - [NA](#na)
 - [Factor](#factor)
-- [Matrix](#matrix-1)
-- [Linear Regression](#linear-regression)
+- [Matrix](#matrix)
 - [Save and load data](#save-and-load-data)
 - [Function](#function)
-
+- [Linear Regression](#linear-regression)
 
 
 ## Dir & File
