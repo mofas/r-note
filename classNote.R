@@ -1,4 +1,6 @@
 
+# 2
+
 wine = read.csv("wine.csv")
 model = lm(Price ~ WinterRain + HarvestRain, data=wine)
 
@@ -21,3 +23,22 @@ SST = sum((wine$Price - mean(wine$Price))^2)
 
 RMSE = sqrt(SSE/nrow(model))
 
+
+# 3
+
+Logit = b0 + b1*x1 + b2*x2 + ..
+
+Odd = exp(Logit)
+
+P(y=1) = 1/(1+e^(-Logit))
+
+# randomly seprate dataset
+install.packages("caTools")
+library(caTools)
+
+quality = read.csv("quality.csv")
+set.seed(88)
+split = sample.split(quality$PoorCare, SplitRatio = 0.75)
+qualityTrain = subset(quality, split == TRUE)
+qualityTest = subset(quality, split == FALSE)
+QualityLog = glm(PoorCare ~ StartedOnCombination + ProviderCount, data=qualityTrain, family=binomial)
