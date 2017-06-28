@@ -62,3 +62,4 @@ table(SongsTest$Top10, SongsPred >= 0.45)
 # 309 / (309+5)
 
 # 4.5
+SongsPred = predict(SongsLog3, newdata=SongsTest, type="response")
