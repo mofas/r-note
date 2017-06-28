@@ -42,3 +42,31 @@ split = sample.split(quality$PoorCare, SplitRatio = 0.75)
 qualityTrain = subset(quality, split == TRUE)
 qualityTest = subset(quality, split == FALSE)
 QualityLog = glm(PoorCare ~ StartedOnCombination + ProviderCount, data=qualityTrain, family=binomial)
+
+# calculate sensitivity and specificity
+table(qualityTrain$PoorCare, predTrain > 0.5)
+
+
+# TN | FP
+# -------
+# FN | TP
+
+# sensitivity = TP / (TP + FN)
+# specificity = TN / (TN + FP)
+
+# threshold up, sensitivity down
+
+
+install.packages("ROCR")
+library(ROCR)
+
+predictTest = predict(QualityLog, type="response", newdata=qualityTest)
+ROCRpredTest = prediction(predictTest, qualityTest$PoorCare)
+auc = as.numeric(performance(ROCRpredTest, "auc")@y.values)
+
+
+install.packages("mice")
+library(mice)
+simple = polling[c("Rasmussen", "SurveyUSA", "PropR", "DiffCount")]
+set.seed(144)
+imputed = complete(mice(simple))
