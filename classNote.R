@@ -70,3 +70,43 @@ library(mice)
 simple = polling[c("Rasmussen", "SurveyUSA", "PropR", "DiffCount")]
 set.seed(144)
 imputed = complete(mice(simple))
+
+
+# 4
+
+install.packages("rpart")
+library(rpart)
+install.packages("rpart.plot")
+library(rpart.plot)
+
+
+# Get ROC Curve / AUC
+StevensTree = rpart(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, method="class", minbucket=25)
+PredictROC = predict(StevensTree, newdata = Test)
+ROCRpredTest = prediction(PredictROC[,2], Test$Reverse)
+as.numeric(performance(ROCRpredTest, "auc")@y.values)
+
+set.seed(100)
+StevensForest = randomForest(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, ntree=200, nodesize=25)
+PredictForest = predict(StevensForest, newdata = Test)
+table(Test$Reverse, PredictForest)
+# (43+74)/(43+74+19+34)
+
+set.seed(200)
+StevensForest = randomForest(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, ntree=200, nodesize=25)
+PredictForest = predict(StevensForest, newdata = Test)
+table(Test$Reverse, PredictForest)
+# (44+76)/(44+76+17+33)
+
+# Cross Validation for pick cp
+numFolds = trainControl( method = "cv", number = 10 )
+cpGrid = expand.grid( .cp = seq(0.01,0.5,0.01))
+train(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, method = "rpart", trControl = numFolds, tuneGrid = cpGrid )
+
+# Create a new CART model using picked cp
+StevensTreeCV = rpart(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, method="class", cp = 0.18)
+
+
+table(ClaimsTest$bucket2009)[1]/nrow(ClaimsTest)
+
+sum(as.matrix(table(ClaimsTest$bucket2009))*c(0, 2, 4, 6, 8))/nrow(ClaimsTest)
