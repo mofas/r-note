@@ -98,16 +98,16 @@ PredictForest = predict(StevensForest, newdata = Test)
 table(Test$Reverse, PredictForest)
 # (44+76)/(44+76+17+33)
 
-# Cross Validation for pick cp
+# Cross Validation for picking cp
 numFolds = trainControl(method = "cv", number = 10)
 cpGrid = expand.grid( .cp = seq(0.01,0.5,0.01))
 train(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data=Train, method="rpart", trControl=numFolds, tuneGrid=cpGrid)
 
 # Create a new CART model using picked cp
-StevensTreeCV = rpart(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, method="class", cp = 0.18)
+Tree = rpart(Reverse ~ Circuit + Issue + Petitioner + Respondent + LowerCourt + Unconst, data = Train, method="class", cp = 0.18)
 
 # Print Tree
-prp(StevensTreeCV)
+prp(Tree)
 
 table(ClaimsTest$bucket2009)[1]/nrow(ClaimsTest)
 

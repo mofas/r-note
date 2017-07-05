@@ -16,6 +16,8 @@ This document record some common used R script for data analysis.
 - [Save and load data](#save-and-load-data)
 - [Function](#function)
 - [Linear Regression](#linear-regression)
+- [Logistic Regression](#logistic-regression)
+- [Tree & Random Forest](#tree--random-forest)
 
 
 ## Dir & File
@@ -330,7 +332,7 @@ search()
 trainData = read.csv("trainData.csv")
 testData = read.csv("testData.csv")
 
-# build model which automatically mapp to all other column
+# build model which automatically map to all other column
 model1 = lm(y ~., data=trainData)
 # explicitly indicate which column will be used as independent data.
 model2 = lm(y ~ x1 + x2 + x3, data=trainData)
@@ -347,3 +349,29 @@ predTest2 = predict(model2, newdata=testData)
 SSE = sum((testData$y - predTest1)^2)
 RMSE = sqrt(SSE/nrow(testData))
 ```
+
+# Logistic Regression
+
+```r
+# build model which automatically map to all other column
+model = glm(y ~ ., data=trainData, family=binomial)
+
+# check coorelation
+cor(trainData)
+
+# make prediction
+predTest = predict(model, newdata=testData, type="response")
+
+# Calculate accuracy
+table(testData$y, predTest >= 0.45)
+
+# Calculate ROCR & AUC
+ROCRpredTest = prediction(predTest, testData$y)
+AUC = as.numeric(performance(ROCRpredTest, "auc")@y.values)
+
+```
+
+# Tree & Random Forest
+
+TODO..
+

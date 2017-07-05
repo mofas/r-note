@@ -88,7 +88,3 @@ table(test$over50k, PredictROC)
 prp(censusTreeCV)
 
 
-
-
-
-
