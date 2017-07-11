@@ -115,3 +115,36 @@ table(ClaimsTest$bucket2009)[1]/nrow(ClaimsTest)
 sum(as.matrix(table(ClaimsTest$bucket2009))*c(0, 2, 4, 6, 8))/nrow(ClaimsTest)
 
 
+
+# 5
+
+# normalized text data
+tweets = read.csv("tweets.csv", stringsAsFactors=FALSE)
+corpus = VCorpus(VectorSource(tweets$Tweet))
+corpus = tm_map(corpus, tolower)
+corpus = tm_map(corpus, removePunctuation)
+corpus = tm_map(corpus, stemDocument)
+
+# transfer to matrix
+frequencies = DocumentTermMatrix(corpus)
+
+# show words with min frequency
+findFreqTerms(frequencies, lowfreq=100)
+
+# remove sparse data
+sparse = removeSparseTerms(frequencies, 0.995)
+tweetsSparse = as.data.frame(as.matrix(sparse))
+colnames(tweetsSparse) = make.names(colnames(tweetsSparse))
+tweetsSparse$Negative = tweets$Negative
+
+# split data
+set.seed(123)
+split = sample.split(tweetsSparse$Negative, SplitRatio = 0.7)
+trainSparse = subset(tweetsSparse, split==TRUE)
+testSparse = subset(tweetsSparse, split==FALSE)
+
+tweetLog = glm(Negative ~ ., data=trainSparse, family=binomial)
+predictions = predict(tweetLog, newdata=testSparse, type="response")
+table(testSparse$Negative, predictions > 0.5)
+
+(253 + 32) / nrow(testSparse)
