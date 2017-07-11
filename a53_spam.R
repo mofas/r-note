@@ -136,8 +136,59 @@ as.numeric(performance(predictionTestRF, "auc")@y.values)
 
 # 4.8
 
+# 5.1
+
+# 5.2
+
+# 5.3
+
+# 5.4
+
+# 5.5
+
+# 5.6
 
 
+# 6.1
+wordCount = rowSums(as.matrix(dtm))
 
+# 6.2
+hist(wordCount)
 
+# 6.3
+hist(log(wordCount))
+
+# 6.4
+emailsSparse$logWordCount = log(wordCount)
+boxplot(emailsSparse$logWordCount ~ emailsSparse$spam)
+
+# 6.5
+train2 = subset(emailsSparse, spl == TRUE)
+test2 = subset(emailsSparse, spl == FALSE)
+spam2CART = rpart(spam~., data=train2, method="class")
+
+set.seed(123)
+spam2RF = randomForest(spam~., data=train2)
+
+prp(spam2CART)
+
+# 6.6
+predTest2CART = predict(spam2CART, newdata=test2)[,2]
+table(test2$spam , predTest2CART > 0.5)
+
+(1214 + 384) / nrow(test2)
+
+# 6.7
+predictionTest2CART = prediction(predTest2CART, test2$spam)
+as.numeric(performance(predictionTestCART, "auc")@y.values)
+
+# 6.8
+predTest2RF = predict(spam2RF, newdata=test2)
+table(test2$spam , predTest2RF > 0.5)
+
+(1285 + 385) / nrow(test2)
+
+# 6.9
+predictionTest2RF = prediction(predTest2RF, test2$spam)
+as.numeric(performance(predictionTest2RF, "auc")@y.values)
 
