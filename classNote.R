@@ -164,3 +164,6 @@ distance = dist(flowerVector, method = "euclidean")
 clusterIntensity = hclust(distance, method="ward.D")
 flowerClusters = cutree(clusterIntensity, k = 3)
 
+set.seed(1)
+KMC = kmeans(healthyVector, centers = k, iter.max = 1000)
+str(KMC)
