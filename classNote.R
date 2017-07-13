@@ -148,3 +148,19 @@ predictions = predict(tweetLog, newdata=testSparse, type="response")
 table(testSparse$Negative, predictions > 0.5)
 
 (253 + 32) / nrow(testSparse)
+
+
+# 6
+movies = read.table("movieLens.txt", header=FALSE, sep="|",quote="\"")
+distances = dist(movies[2:20], method = "euclidean")
+clusterMovies = hclust(distances, method = "ward.D")
+clusterGroups = cutree(clusterMovies, k = 2)
+plot(clusterMovies)
+
+flower = read.csv("flower.csv", header=FALSE)
+flowerMatrix = as.matrix(flower)
+flowerVector = as.vector(flowerMatrix)
+distance = dist(flowerVector, method = "euclidean")
+clusterIntensity = hclust(distance, method="ward.D")
+flowerClusters = cutree(clusterIntensity, k = 3)
+
