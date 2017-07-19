@@ -167,3 +167,17 @@ flowerClusters = cutree(clusterIntensity, k = 3)
 set.seed(1)
 KMC = kmeans(healthyVector, centers = k, iter.max = 1000)
 str(KMC)
+
+
+# 7
+
+ggplot(WHO, aes(x = FertilityRate, y = Under15, color = Region)) + geom_point() + scale_color_brewer(palette="Dark2")
+
+
+ggplot(WeekdayCounts, aes(x=Var1, y=Freq)) + geom_line(aes(group=1), linetype=2, alpha=0.3)
+
+LatLonCounts = as.data.frame(table(round(mvt$Longitude,2), round(mvt$Latitude,2)))
+LatLonCounts2 = subset(LatLonCounts, Freq > 0)
+ggmap(chicago) + geom_tile(data = LatLonCounts2, aes(x = Long, y = Lat, alpha = Freq), fill="red")
+
+ggplot(murderMap, aes(x = long, y = lat, group = group, fill = GunOwnership)) + geom_polygon(color = "black") + scale_fill_gradient(low = "black", high = "red", guide = "legend")
