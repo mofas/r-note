@@ -119,10 +119,13 @@ sum(as.matrix(table(ClaimsTest$bucket2009))*c(0, 2, 4, 6, 8))/nrow(ClaimsTest)
 # 5
 
 # normalized text data
+library(tm)
+
 tweets = read.csv("tweets.csv", stringsAsFactors=FALSE)
 corpus = VCorpus(VectorSource(tweets$Tweet))
-corpus = tm_map(corpus, tolower)
+corpus = tm_map(corpus, content_transformer(tolower))
 corpus = tm_map(corpus, removePunctuation)
+corpus = tm_map(corpus, removeWords, stopwords("english"))
 corpus = tm_map(corpus, stemDocument)
 
 # transfer to matrix
