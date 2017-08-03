@@ -184,3 +184,8 @@ LatLonCounts2 = subset(LatLonCounts, Freq > 0)
 ggmap(chicago) + geom_tile(data = LatLonCounts2, aes(x = Long, y = Lat, alpha = Freq), fill="red")
 
 ggplot(murderMap, aes(x = long, y = lat, group = group, fill = GunOwnership)) + geom_polygon(color = "black") + scale_fill_gradient(low = "black", high = "red", guide = "legend")
+
+
+# 8
+
+=sumproduct(C5:C6;E5:E6)
