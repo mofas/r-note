@@ -13,3 +13,4 @@ Fee = Payment * 0.01
 
 CashGet = Gain - Tax - Fee
 
+
